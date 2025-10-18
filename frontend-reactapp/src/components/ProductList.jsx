@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import config from './config.js';
 
-const BASE_URL = import.meta.env.VITE_API_URL;
-const API_URL = `${BASE_URL}/productapi`;
+const baseUrl = `${config.url}`;
+// const API_URL = `${BASE_URL}/productapi`;
 
 function ProductList() {
   const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ function ProductList() {
 
   const loadProducts = async () => {
     try {
-      const res = await axios.get(`${API_URL}/all`);
+      const res = await axios.get(`${baseUrl}/all`);
       if (res.data.products) {
         setProducts(res.data.products);
         setMessage("");
@@ -31,7 +32,7 @@ function ProductList() {
   const deleteProduct = async (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
-        const res = await axios.delete(`${API_URL}/delete/${id}`);
+        const res = await axios.delete(`${baseUrl}/delete/${id}`);
         alert(res.data);
         loadProducts();
       } catch (err) {

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import './style.css'
+import config from './config.js';
 
 
-const BASE_URL = import.meta.env.VITE_API_URL;
-const API_URL = `${BASE_URL}/productapi`;
+const baseUrl = `${config.url}`;
+// const API_URL = `${BASE_URL}/productapi`;
 
 function EditProduct() {
   const [product, setProduct] = useState({ name: "", description: "", price: "" });
@@ -19,7 +20,7 @@ function EditProduct() {
 
   const loadProduct = async () => {
     try {
-      const res = await axios.get(`${API_URL}/get/${id}`);
+      const res = await axios.get(`${baseUrl}/get/${id}`);
       if (typeof res.data === "string") {
         setMessage(res.data);
       } else {
@@ -38,7 +39,7 @@ function EditProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`${API_URL}/update/${id}`, product);
+      const res = await axios.put(`${baseUrl}/update/${id}`, product);
       alert(res.data.message);
       navigate("/");
     } catch (err) {

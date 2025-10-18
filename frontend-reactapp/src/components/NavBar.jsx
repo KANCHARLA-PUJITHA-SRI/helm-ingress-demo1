@@ -6,6 +6,7 @@ import EditProduct from "./EditProduct";
 import ViewProduct from "./ViewProduct";
 import "./navbar.css";
 
+
 function Navbar() {
   return (
     <div>

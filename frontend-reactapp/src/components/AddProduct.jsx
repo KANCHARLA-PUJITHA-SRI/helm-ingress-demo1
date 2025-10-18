@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './style.css'
+import config from './config.js';
 
-const BASE_URL = import.meta.env.VITE_API_URL;
-const API_URL = `${BASE_URL}/productapi`;
+const baseUrl = `${config.url}`;
 
 function AddProduct() {
   const [product, setProduct] = useState({ name: "", description: "", price: "" });
@@ -17,7 +17,7 @@ function AddProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_URL}/add`, product);
+      const res = await axios.post(`${baseUrl}/add`, product);
       alert(res.data);
       navigate("/");
     } catch (err) 

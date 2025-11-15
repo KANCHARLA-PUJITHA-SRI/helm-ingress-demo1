@@ -7,8 +7,8 @@ COPY mvnw .
 COPY .mvn/ .mvn
 
 RUN chmod +x mvnw
-COPY pom.xml ./
 
+COPY pom.xml ./
 COPY src ./src
 
 RUN ./mvnw clean package -DskipTests
@@ -21,4 +21,4 @@ COPY --from=builder /app/target/*.jar app.jar
 
 EXPOSE 7546
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
